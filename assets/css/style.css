@@ -1,0 +1,54 @@
+/*Trivia Game Style*/
+
+
+body {
+	font-size: 18px;
+	text-align: center;
+	background-color: gray;
+	padding: 10px;
+	margin: 0 auto;
+}
+
+.container {
+	background-color: white;
+}
+
+h1 {
+	font-weight: bold;
+	font-size: 40px;
+}
+
+li {
+	color: blue;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: #ddd;
+	padding: 10px;
+	margin: 5px 0 5px 0;
+	width: 200px;
+	text-align: center;
+}
+
+ul {
+	margin-bottom: 5px;
+}
+
+.questionStyle {
+	font-size: 28px;
+	font-weight: bold;
+	color: red;
+	padding: 10px;
+}
+
+/*.optionsStyle {
+	font-size: 28px;
+	font-weight: bold;
+}
+*/
+
+
+
+
+#timer {
+
+}
