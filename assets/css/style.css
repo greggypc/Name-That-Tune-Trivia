@@ -19,14 +19,14 @@ h1 {
 }
 
 .options {
-	color: blue;
+	/*color: blue;
 	font-size: 18px;
 	font-weight: bold;
 	background-color: #ddd;
 	padding: 10px;
 	margin: 5px 0 5px 0;
-	width: 200px;
-	text-align: center;
+	width: 200px;*/
+	display: inline-block;
 }
 
 ul {
