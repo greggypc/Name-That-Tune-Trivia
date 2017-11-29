@@ -24,8 +24,9 @@ h1 {
 	font-weight: bold;
 	background-color: #ddd;
 	padding: 10px;
-	margin: 5px 0 5px 0;
+	
 	width: 200px;*/
+	margin: 5px 0 5px 0;
 	display: inline-block;
 }
 
@@ -37,7 +38,7 @@ ul {
 	font-size: 28px;
 	font-weight: bold;
 	color: red;
-	padding: 10px;
+	padding: 20px;
 }
 
 /*.optionsStyle {
