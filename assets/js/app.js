@@ -39,7 +39,7 @@ $(document).ready(function() {
   });
 
   function startTimer15() {
-        var count = 9;
+        var count = 3;
         counter = setInterval(timer, 1000); //1000 will  run it every 1 second
         function timer() {
             count--;
@@ -54,7 +54,8 @@ $(document).ready(function() {
   };
 
   function timerNextQ() {
-    if (i < 4) {
+    i++; //iterate to next question
+    if (i <= 3) {
       getQuestion();
       startTimer15();
     }else {
@@ -72,7 +73,7 @@ $(document).ready(function() {
     $("#display").append('<div class="possibleAnswer" data="D">' + triviaQs[i].choices[3] + '</div>');
     console.log("ran thru 1 iteration of triviaQs");
     
-    i++; //iterate to next question
+    
   };
 
   // $("html").on("click", function() {
@@ -82,7 +83,8 @@ $(document).ready(function() {
   //   });
 
   $(document).on("click", ".possibleAnswer", function() {
-      if (this.data === triviaQs[i].correctAnswer) {
+    var userGuess = this.data;
+      if (userGuess === triviaQs[i].correctAnswer) {
         console.log("u just clicked an answer");
         console.log("correct answer");
         right++;
@@ -123,14 +125,28 @@ $(document).ready(function() {
        '<div>Correct Answers: ' + right + '</div>' +
        '<div>Incorrect Answers: ' + wrong + '</div>' +
        '<div>Unanswered Questions: ' + unanswered + '</div>');
+       playAgain();
     }else if (right <= wrong) {
        $("#display").html('<div>No so great...</div>');
        $("#display").append(
        '<div>Correct Answers: ' + right + '</div>' +
        '<div>Incorrect Answers: ' + wrong + '</div>' +
        '<div>Unanswered Questions: ' + unanswered + '</div>');
-    }
+       playAgain();
+      }
 
+
+    };
+
+    function playAgain() {
+      $("#display").append('<button>Play Again!</button>');
+      $("button").on("click", function() {
+        i = 0;
+      console.log("you clicked play again");
+      $("button").hide();
+      getQuestion();
+      startTimer15();
+      });
     };
   
 
