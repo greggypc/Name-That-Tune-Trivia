@@ -24,6 +24,8 @@
 var i = 0;
 var right = 0;
 var wrong = 0;
+var unanswered = 0;
+var counter;
 
 $(document).ready(function() {
 
@@ -37,8 +39,8 @@ $(document).ready(function() {
   });
 
   function startTimer15() {
-        var count = 5;
-        var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
+        var count = 9;
+        counter = setInterval(timer, 1000); //1000 will  run it every 1 second
         function timer() {
             count--;
             if (count < 1) {
@@ -64,34 +66,41 @@ $(document).ready(function() {
     console.log("getQuestion function running");
     $("#display").empty();
     $("#display").addClass("questionStyle").append('<div>' + triviaQs[i].question + '</div>');
-    $("#display").append(
-    '<div class="possibleAnswer" data-key="A">' + triviaQs[i].choices[0] + '</div>' +
-    '<div class="possibleAnswer" data-key="B">' + triviaQs[i].choices[1] + '</div>' +
-    '<div class="possibleAnswer" data-key="C">' + triviaQs[i].choices[2] + '</div>' +
-    '<div class="possibleAnswer" data-key="D">' + triviaQs[i].choices[3] + '</div>');
+    $("#display").append('<div class="possibleAnswer" data="A">' + triviaQs[i].choices[0] + '</div>');
+    $("#display").append('<div class="possibleAnswer" data="B">' + triviaQs[i].choices[1] + '</div>');
+    $("#display").append('<div class="possibleAnswer" data="C">' + triviaQs[i].choices[2] + '</div>');
+    $("#display").append('<div class="possibleAnswer" data="D">' + triviaQs[i].choices[3] + '</div>');
     console.log("ran thru 1 iteration of triviaQs");
     
     i++; //iterate to next question
   };
 
-  $(".possibleAnswer").on("click", function() {
+  // $("html").on("click", function() {
+    
+  //       console.log("correct answer");
+       
+  //   });
+
+  $(document).on("click", ".possibleAnswer", function() {
       if (this.data === triviaQs[i].correctAnswer) {
         console.log("u just clicked an answer");
         console.log("correct answer");
         right++;
-        //clearInterval(counter);
+        clearInterval(counter);
         userCorrect();
       }else {
-        console.log("wrong answer");
-        wrong++;
-        //clearInterval(counter);
-        userWrong();
+       console.log("u just clicked an answer");
+       console.log("wrong answer");
+       wrong++;
+       clearInterval(counter);
+       userWrong();
       }
     });
 
   function timeRanOut() {
     console.log("function timeRanOut is running");
     $("#display").html("Time ran out!");
+    unanswered++;
     setTimeout(timerNextQ, 5000);
   };
 
@@ -108,17 +117,21 @@ $(document).ready(function() {
   };
 
   function displayGameResults () {
-    if (right > wrong) {
-       $("#display").html("Nice work!");
-       $("#display").append("Correct Answers: " + right);
-       $("#display").append("Incorrect Answers: " + wrong);
+    if (right > wrong && unanswered) {
+       $("#display").html('<div>Nice work!</div>');
+      $("#display").append(
+       '<div>Correct Answers: ' + right + '</div>' +
+       '<div>Incorrect Answers: ' + wrong + '</div>' +
+       '<div>Unanswered Questions: ' + unanswered + '</div>');
     }else if (right <= wrong) {
-       $("#display").html("No so great...");
-       $("#display").append("Correct Answers: " + right);
-       $("#display").append("Incorrect Answers: " + wrong);
+       $("#display").html('<div>No so great...</div>');
+       $("#display").append(
+       '<div>Correct Answers: ' + right + '</div>' +
+       '<div>Incorrect Answers: ' + wrong + '</div>' +
+       '<div>Unanswered Questions: ' + unanswered + '</div>');
     }
 
-    }
+    };
   
 
 });   
