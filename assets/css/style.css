@@ -41,11 +41,15 @@ ul {
 	padding: 20px;
 }
 
-/*.optionsStyle {
-	font-size: 28px;
+.possibleAnswer {
+	font-size: 20px;
 	font-weight: bold;
+	color: white;
+	background-color: green;
+	padding: 20px;
+	margin: 5px;
 }
-*/
+
 
 
 

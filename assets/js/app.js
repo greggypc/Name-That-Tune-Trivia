@@ -1,160 +1,127 @@
 // Trivia Game
 
-    var triviaQuestions = [{
+    var triviaQs = [{
 	 	question: "What was Yesterday?",
 	 	choices: ["Monday", "Tuesday", "A Song", "Sunday"],
-	 	correctAnswer: 0,
-	 	name: "Q0"
+	 	correctAnswer: "C"
 	},
 	{
-	 	question: "What was that?",
-	 	choices: ["A Ghost", "Huh?", "Where?", "A Gnat"],
-	 	correctAnswer: 1,
-	 	name: "Q1"
+	 	question: "Which is usually is green?",
+	 	choices: ["The street", "The sky", "Grass", "Basketball"],
+	 	correctAnswer: "C"
 	},
 	{
-	 	question: "What was what?",
-	 	choices: ["A Ghost", "Huh?", "Where?", "A Gnat"],
-	 	correctAnswer: 2,
-	 	name: "Q2"
+	 	question: "What was last October?",
+	 	choices: ["The past", "The Future", "The Present", "Tomorrow"],
+	 	correctAnswer: "A"
 	},
 	{
 	 	question: "Which is a fruit?",
-	 	choices: ["Purple", "Marinara", "Vegetable", "Molasses"],
-	 	correctAnswer: 3,
-	 	name: "Q3"	 	
+	 	choices: ["Purple", "Marinara", "Vegetable", "Apple"],
+	 	correctAnswer: "D"	 	
 	}];
 
-
-    var userAnswer;
-    var correctAnswers;
-    var incorrectAnswers;
-    var i = 0;
+var i = 0;
+var right = 0;
+var wrong = 0;
 
 $(document).ready(function() {
 
-	function startTimer() {
-        var count = 11;
+  $("#display").html('<button id="buttonStart">START</button>');
+
+  $("#buttonStart").on("click", function() {
+    console.log("you clicked start");
+    $("#buttonStart").hide();
+    getQuestion();
+    startTimer15();
+  });
+
+  function startTimer15() {
+        var count = 5;
         var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
         function timer() {
             count--;
-            if (count < 0) {
+            if (count < 1) {
                 clearInterval(counter);
                 //counter ended, do something here
-               // gameResults();
-               checkAnswers();
+                console.log("time ran out!");
+                timeRanOut();
             };
-            $("#timer").html("Time Remaining: " + count);
-            
+        $("#timer").html("Time Remaining: " + count);    
         };
-    };
+  };
 
-   function gameStart() {
-   	$("#buttonSubmit").hide();
-        $("#buttonStart").on("click", function() {
-        	console.log("start button fired");
-            $("#buttonStart").hide();
-            $("#buttonSubmit").show();
-            layoutQuestions();
+  function timerNextQ() {
+    if (i < 4) {
+      getQuestion();
+      startTimer15();
+    }else {
+      displayGameResults();
+    }
+  }
 
+  function getQuestion() {
+    console.log("getQuestion function running");
+    $("#display").empty();
+    $("#display").addClass("questionStyle").append('<div>' + triviaQs[i].question + '</div>');
+    $("#display").append(
+    '<div class="possibleAnswer" data-key="A">' + triviaQs[i].choices[0] + '</div>' +
+    '<div class="possibleAnswer" data-key="B">' + triviaQs[i].choices[1] + '</div>' +
+    '<div class="possibleAnswer" data-key="C">' + triviaQs[i].choices[2] + '</div>' +
+    '<div class="possibleAnswer" data-key="D">' + triviaQs[i].choices[3] + '</div>');
+    console.log("ran thru 1 iteration of triviaQs");
+    
+    i++; //iterate to next question
+  };
 
-        });
-    };
+  $(".possibleAnswer").on("click", function() {
+      if (this.data === triviaQs[i].correctAnswer) {
+        console.log("u just clicked an answer");
+        console.log("correct answer");
+        right++;
+        //clearInterval(counter);
+        userCorrect();
+      }else {
+        console.log("wrong answer");
+        wrong++;
+        //clearInterval(counter);
+        userWrong();
+      }
+    });
 
+  function timeRanOut() {
+    console.log("function timeRanOut is running");
+    $("#display").html("Time ran out!");
+    setTimeout(timerNextQ, 5000);
+  };
 
-   function layoutQuestions() {
-    	for (var i = 0; i < triviaQuestions.length; i++) {
-    		$("#display").addClass("questionStyle").append("<div>" + triviaQuestions[i].question + "</div>");
-    		$("#display").append(
-    		'<input type="radio" name="' + triviaQuestions[i].name + '" value="A" class="options">' + triviaQuestions[i].choices[0] + '</input>' +
-    		'<input type="radio" name="' + triviaQuestions[i].name + '" value="B" class="options">' + triviaQuestions[i].choices[1] + '</input>' +
-    		'<input type="radio" name="' + triviaQuestions[i].name + '" value="C" class="options">' + triviaQuestions[i].choices[2] + '</input>' +
-    		'<input type="radio" name="' + triviaQuestions[i].name + '" value="D" class="options">' + triviaQuestions[i].choices[3] + '</input>');
-    		
-    	};
-    	$("#timer").show();
-    	startTimer();
-    	//getAnswers();
-    };
+  function userCorrect() {
+    console.log("function userCorrect is running");
+    $("#display").html("You are correct!");
+    setTimeout(timerNextQ, 5000);
+  };
 
- //    function makeGuess(){
-	// if ($(this).data("choice") == currentQuestion.correctAnswer){
-	// 	numberRight++;
-	// 	showResult("Correct!", "correctResult");
-	// } else {
-	// 	numberWrong++;
-	// 	showResult("Wrong. The correct answer was " + currentQuestion.answers[currentQuestion.correctAnswer], "wrongResult");
-	// }
-	// };
+  function userWrong() {
+    console.log("function userWrong is running");
+    $("#display").html("You are incorrect!");
+    setTimeout(timerNextQ, 5000);
+  };
 
+  function displayGameResults () {
+    if (right > wrong) {
+       $("#display").html("Nice work!");
+       $("#display").append("Correct Answers: " + right);
+       $("#display").append("Incorrect Answers: " + wrong);
+    }else if (right <= wrong) {
+       $("#display").html("No so great...");
+       $("#display").append("Correct Answers: " + right);
+       $("#display").append("Incorrect Answers: " + wrong);
+    }
+
+    }
   
-  // userAnswer = $('input:radio:checked').val(); 
-  //           checkAnswers(userAnswer);
 
+});   
 
-  // var movie = $("#movie-input").val();
-          //movies.push($("#movie-input").val());
+    
 
-
-
-function checkAnswers() {
-$.each($("input[name='Q0']:checked"), function() {
-      if ($('input:radio:checked').val() === triviaQuestions[0].correctAnswer) {
-      	console.log("correct answer");
-        correctAnswers++;
-      }
-      else {
-        incorrectAnswers++;
-        console.log("incorrect answer");
-      }
-    });
-
-$.each($("input[name='Q1']:checked"), function() {
-      if ($(this).val() === triviaQuestions[1].correctAnswer) {
-        correctAnswers++;
-      }
-      else {
-        incorrectAnswers++;
-      }
-    });
-
-$.each($("input[name='Q2']:checked"), function() {
-      if ($(this).val() === triviaQuestions[2].correctAnswer) {
-        correctAnswers++;
-      }
-      else {
-        incorrectAnswers++;
-      }
-    });
-
-$.each($("input[name='Q3']:checked"), function() {
-      if ($(this).val() === triviaQuestions[3].correctAnswer) {
-        correctAnswers++;
-      }
-      else {
-        incorrectAnswers++;
-      }
-    });
-//gameResults();
-};
-
-    function gameResults() {
-        $("#timer").hide();
-        $("#buttonSubmit").hide();
-        $("#display").html("Correct Answers: " + correctAnswers);
-        $("#display").append("Wrong Answers: " + incorrectAnswers);
-        $("#buttonStart").show();
-        //$("#buttonSubmit").show();
-    };
-
-    $("#buttonSubmit").on("click", function() {
-    	console.log("submit-you finished b4 time ran out");
-    	//stop timer@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@do this
-         $("#buttonSubmit").hide();
-         checkAnswers(); 
-         gameResults();
-        }); //end click function
-
-gameStart();
-
-});
