@@ -34,7 +34,7 @@
 $(document).ready(function() {
 
 	function startTimer() {
-        var count = 200;
+        var count = 11;
         var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
         function timer() {
             count--;
@@ -72,7 +72,7 @@ $(document).ready(function() {
     		'<input type="radio" name="' + triviaQuestions[i].name + '" value="D" class="options">' + triviaQuestions[i].choices[3] + '</input>');
     		
     	};
-    	//$("#display").append('<button id="submitButton">Submit</button>');
+    	$("#timer").show();
     	startTimer();
     	//getAnswers();
     };
@@ -90,6 +90,12 @@ $(document).ready(function() {
   
   // userAnswer = $('input:radio:checked').val(); 
   //           checkAnswers(userAnswer);
+
+
+  // var movie = $("#movie-input").val();
+          //movies.push($("#movie-input").val());
+
+
 
 function checkAnswers() {
 $.each($("input[name='Q0']:checked"), function() {
@@ -138,12 +144,13 @@ $.each($("input[name='Q3']:checked"), function() {
         $("#display").html("Correct Answers: " + correctAnswers);
         $("#display").append("Wrong Answers: " + incorrectAnswers);
         $("#buttonStart").show();
-        $("#buttonSubmit").show();
+        //$("#buttonSubmit").show();
     };
 
     $("#buttonSubmit").on("click", function() {
     	console.log("submit-you finished b4 time ran out");
-    	//stop timer
+    	//stop timer@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@do this
+         $("#buttonSubmit").hide();
          checkAnswers(); 
          gameResults();
         }); //end click function
