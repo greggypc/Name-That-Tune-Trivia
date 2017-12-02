@@ -1,21 +1,25 @@
 // Trivia Game
 
     var triviaQs = [{
-	 	question: "What was Yesterday?",
+	 	song: "assets/audio/trim/andy_griffin-t.mp3",
+    question: "What was Yesterday?",
 	 	choices: ["Monday", "Tuesday", "A Song", "Sunday"],
 	 	correctAnswer: "C"
 	},
 	{
+    song: "assets/audio/trim/mash-t.mp3",
 	 	question: "Which is usually is green?",
 	 	choices: ["The street", "The sky", "Grass", "Basketball"],
 	 	correctAnswer: "C"
 	},
 	{
+    song: "assets/audio/trim/mad_men-t.mp3",
 	 	question: "What was last October?",
 	 	choices: ["The past", "The Future", "The Present", "Tomorrow"],
 	 	correctAnswer: "A"
 	},
 	{
+    song: "assets/audio/kill_bill_trimmed.mp3",
 	 	question: "Which is a fruit?",
 	 	choices: ["Purple", "Marinara", "Vegetable", "Apple"],
 	 	correctAnswer: "D"	 	
@@ -25,7 +29,8 @@ var i = 0;
 var right = 0;
 var wrong = 0;
 var unanswered = 0;
-var counter;
+var counter = 10;
+var songClip;
 
 $(document).ready(function() {
 
@@ -39,30 +44,34 @@ $(document).ready(function() {
   });
 
   function startTimer15() {
-        var count = 3;
+        count = 11;
         counter = setInterval(timer, 1000); //1000 will  run it every 1 second
         function timer() {
+            
             count--;
+            $("#timer").html("Time Remaining: " + count); 
             if (count < 1) {
                 clearInterval(counter);
                 //counter ended, do something here
                 console.log("time ran out!");
                 timeRanOut();
             };
-        $("#timer").html("Time Remaining: " + count);    
+           
         };
   };
 
   function timerNextQ() {
     i++; //iterate to next question
     if (i <= 3) {
-      getQuestion();
+      $("#timer").html("Time Remaining: 10");
       startTimer15();
+      getQuestion();
+      
     }else {
       displayGameResults();
     }
   }
-
+            //trim my songs to 9 secs and make timer 10 sec. Still include .stop();
 
             // // Sound effect
             // var songClip = document.createElement("audio");
@@ -79,7 +88,11 @@ $(document).ready(function() {
   function getQuestion() {
     console.log("getQuestion function running");
     $("#display").empty();
-    $("#display").addClass("questionStyle").append('<div>' + triviaQs[i].question + '</div>');
+    //Sound effect
+    songClip = document.createElement("audio");
+    songClip.setAttribute("src", triviaQs[i].song);
+    songClip.play();
+    //$("#display").addClass("questionStyle").append('<div>' + triviaQs[i].question + '</div>');
     $("#display").append('<div class="possibleAnswer" data-key="A">' + triviaQs[i].choices[0] + '</div>');
     $("#display").append('<div class="possibleAnswer" data-key="B">' + triviaQs[i].choices[1] + '</div>');
     $("#display").append('<div class="possibleAnswer" data-key="C">' + triviaQs[i].choices[2] + '</div>');
@@ -98,6 +111,7 @@ $(document).ready(function() {
   //var guess = $(this).attr('data-key');
 
   $(document).on("click", ".possibleAnswer", function() {
+    songClip.setAttribute("src", "");
     var userGuess = $(this).attr('data-key');
       if (userGuess === triviaQs[i].correctAnswer) {
         console.log("u just clicked an answer");
@@ -116,20 +130,23 @@ $(document).ready(function() {
 
   function timeRanOut() {
     console.log("function timeRanOut is running");
-    $("#display").html("Time ran out!");
+    $("#display").html('<div>Too slow!</div>' +
+      '<div>Gotta think quick! Here comes the next clip...</div>');
     unanswered++;
     setTimeout(timerNextQ, 5000);
   };
 
   function userCorrect() {
     console.log("function userCorrect is running");
-    $("#display").html("You are correct!");
+    $("#display").html('<div>Correct!</div>' +
+      '<div>Here comes the next clip...</div>');
     setTimeout(timerNextQ, 5000);
   };
 
   function userWrong() {
     console.log("function userWrong is running");
-    $("#display").html("You are incorrect!");
+    $("#display").html('<div>Wrong!</div>' +
+      '<div>Keep trying! Here comes the next clip...</div>');
     setTimeout(timerNextQ, 5000);
   };
 
