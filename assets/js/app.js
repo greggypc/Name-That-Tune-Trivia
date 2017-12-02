@@ -2,53 +2,43 @@
 
     var triviaQs = [{
 	 	song: "assets/audio/andy_griffin-t.mp3",
-    question: "What was Yesterday?",
-	 	choices: ["Monday", "Tuesday", "A Song", "Sunday"],
-	 	correctAnswer: "C"
+    choices: ["Happy Days", "I Love Lucy", "Gomer Pyle", "The Andy Griffith Show"],
+	 	correctAnswer: "D"
 	},{
     song: "assets/audio/mash-t.mp3",
-	 	question: "Which is usually is green?",
-	 	choices: ["The street", "The sky", "Grass", "Basketball"],
-	 	correctAnswer: "C"
+	 	choices: ["Hill Street Blues", "M.A.S.H.", "Taxi", "A-Team"],
+	 	correctAnswer: "B"
 	},{
     song: "assets/audio/mad_men-t.mp3",
-	 	question: "What was last October?",
-	 	choices: ["The past", "The Future", "The Present", "Tomorrow"],
+	 	choices: ["Mad Men", "Orange is the New Black", "Sons of Anarchy", "Dr. Who"],
 	 	correctAnswer: "A"
 	},{
     song: "assets/audio/threes_company-t.mp3",
-	 	question: "Which is a fruit?",
-	 	choices: ["Purple", "Marinara", "Vegetable", "Apple"],
-	 	correctAnswer: "D"	 	
+	 	choices: ["Diff'rent Strokes", "Bosom Buddies", "Three's Company", "Love Boat"],
+	 	correctAnswer: "C"	 	
 	},{
     song: "assets/audio/king_of_the_hill-t.mp3",
-    question: "Which is a fruit?",
-    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
+    choices: ["Sanford & Son", "Reba", "The Simpsons", "King of the Hill"],
     correctAnswer: "D"    
   },{
     song: "assets/audio/knightrider-t.mp3",
-    question: "Which is a fruit?",
-    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
-    correctAnswer: "D"    
+    choices: ["Hawaii 5-0", "Knight Rider", "Battlestar Galactica", "Airwolf"],
+    correctAnswer: "B"    
   },{
     song: "assets/audio/breaking_bad-t.mp3",
-    question: "Which is a fruit?",
-    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
+    choices: ["Better Call Saul", "The Americans", "Seinfeld", "Breaking Bad"],
     correctAnswer: "D"    
   },{
     song: "assets/audio/magnum_tune-t.mp3",
-    question: "Which is a fruit?",
-    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
-    correctAnswer: "D"    
+    choices: ["Magnum P.I.", "Alf", "Simon & Simon", "The Facts of Life"],
+    correctAnswer: "A"    
   },{
     song: "assets/audio/beverley_hillbillies-t.mp3",
-    question: "Which is a fruit?",
-    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
-    correctAnswer: "D"    
+    choices: ["Lavern & Shirley", "Green Acres", "The Beverly Hillbillies", "Jeb's Po' Fam'ly"],
+    correctAnswer: "C"    
   },{
     song: "assets/audio/the_walking_dead-t.mp3",
-    question: "Which is a fruit?",
-    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
+    choices: ["Fear the Walking Dead", "Dexter", "Game of Thrones", "The Walking Dead"],
     correctAnswer: "D"    
   }];
 
@@ -137,7 +127,7 @@ $(document).ready(function() {
     });
 
   function timeRanOut() {
-    console.log("function timeRanOut is running");
+    $("#timer").hide();
     if (i < 9) {
       $("#display").html('<div>Too slow!</div>' +
       '<div>Gotta think quick! Here comes the next clip...</div>');
@@ -153,6 +143,7 @@ $(document).ready(function() {
   };
 
   function userCorrect() {
+    $("#timer").hide();
     if (i < 9) {
     $("#display").html('<div>Correct!</div>' +
       '<div>Here comes the next clip...</div>');
@@ -165,6 +156,7 @@ $(document).ready(function() {
   };
 
   function userWrong() {
+    $("#timer").hide();
     if (i < 9) {
     $("#display").html('<div>Wrong!</div>' +
       '<div>Keep trying! Here comes the next clip...</div>');
