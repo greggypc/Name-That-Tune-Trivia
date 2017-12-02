@@ -1,7 +1,7 @@
 // Trivia Game
 
     var triviaQs = [{
-	 	song: "assets/audio/andy_griffin-t.mp3",
+	 	song: "assets/audio/andy_griffith-t.mp3",
     choices: ["Happy Days", "I Love Lucy", "Gomer Pyle", "The Andy Griffith Show"],
 	 	correctAnswer: "D"
 	},{
