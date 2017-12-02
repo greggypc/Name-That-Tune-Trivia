@@ -1,29 +1,56 @@
 // Trivia Game
 
     var triviaQs = [{
-	 	song: "assets/audio/trim/andy_griffin-t.mp3",
+	 	song: "assets/audio/andy_griffin-t.mp3",
     question: "What was Yesterday?",
 	 	choices: ["Monday", "Tuesday", "A Song", "Sunday"],
 	 	correctAnswer: "C"
-	},
-	{
-    song: "assets/audio/trim/mash-t.mp3",
+	},{
+    song: "assets/audio/mash-t.mp3",
 	 	question: "Which is usually is green?",
 	 	choices: ["The street", "The sky", "Grass", "Basketball"],
 	 	correctAnswer: "C"
-	},
-	{
-    song: "assets/audio/trim/mad_men-t.mp3",
+	},{
+    song: "assets/audio/mad_men-t.mp3",
 	 	question: "What was last October?",
 	 	choices: ["The past", "The Future", "The Present", "Tomorrow"],
 	 	correctAnswer: "A"
-	},
-	{
-    song: "assets/audio/kill_bill_trimmed.mp3",
+	},{
+    song: "assets/audio/threes_company-t.mp3",
 	 	question: "Which is a fruit?",
 	 	choices: ["Purple", "Marinara", "Vegetable", "Apple"],
 	 	correctAnswer: "D"	 	
-	}];
+	},{
+    song: "assets/audio/king_of_the_hill-t.mp3",
+    question: "Which is a fruit?",
+    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
+    correctAnswer: "D"    
+  },{
+    song: "assets/audio/knightrider-t.mp3",
+    question: "Which is a fruit?",
+    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
+    correctAnswer: "D"    
+  },{
+    song: "assets/audio/breaking_bad-t.mp3",
+    question: "Which is a fruit?",
+    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
+    correctAnswer: "D"    
+  },{
+    song: "assets/audio/magnum_tune-t.mp3",
+    question: "Which is a fruit?",
+    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
+    correctAnswer: "D"    
+  },{
+    song: "assets/audio/beverley_hillbillies-t.mp3",
+    question: "Which is a fruit?",
+    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
+    correctAnswer: "D"    
+  },{
+    song: "assets/audio/the_walking_dead-t.mp3",
+    question: "Which is a fruit?",
+    choices: ["Purple", "Marinara", "Vegetable", "Apple"],
+    correctAnswer: "D"    
+  }];
 
 var i = 0;
 var right = 0;
@@ -34,7 +61,9 @@ var songClip;
 
 $(document).ready(function() {
 
-  $("#display").html('<button id="buttonStart">START</button>');
+  $("#display").html("<div>Be sharp! You'll only hear a 10 second clip.</div>" +
+    '<div>Select your answer before the clip ends!</div>' + 
+    '<button id="buttonStart">START</button>');
 
   $("#buttonStart").on("click", function() {
     console.log("you clicked start");
@@ -62,7 +91,7 @@ $(document).ready(function() {
 
   function timerNextQ() {
     i++; //iterate to next question
-    if (i <= 3) {
+    if (i <= 9) {
       $("#timer").html("Time Remaining: 10");
       startTimer15();
       getQuestion();
@@ -72,18 +101,6 @@ $(document).ready(function() {
     }
   }
             //trim my songs to 9 secs and make timer 10 sec. Still include .stop();
-
-            // // Sound effect
-            // var songClip = document.createElement("audio");
-            // openingTheme.setAttribute("src", "assets/audio/kill_bill_trimmed.mp3");
-            // openingTheme.play();
-
-            // Sound effect
-            // var songClip = document.createElement("audio");
-            // songClip.setAttribute("src", triviaQs[i].song);
-            // songClip.play();
-
-            //timer runs out songclip.stop();
 
   function getQuestion() {
     console.log("getQuestion function running");
@@ -98,19 +115,10 @@ $(document).ready(function() {
     $("#display").append('<div class="possibleAnswer" data-key="C">' + triviaQs[i].choices[2] + '</div>');
     $("#display").append('<div class="possibleAnswer" data-key="D">' + triviaQs[i].choices[3] + '</div>');
     console.log("ran thru 1 iteration of triviaQs");
-    
-    
+   
   };
 
-  // $("html").on("click", function() {
-    
-  //       console.log("correct answer");
-       
-  //   });
-
-  //var guess = $(this).attr('data-key');
-
-  $(document).on("click", ".possibleAnswer", function() {
+   $(document).on("click", ".possibleAnswer", function() {
     songClip.setAttribute("src", "");
     var userGuess = $(this).attr('data-key');
       if (userGuess === triviaQs[i].correctAnswer) {
@@ -130,27 +138,46 @@ $(document).ready(function() {
 
   function timeRanOut() {
     console.log("function timeRanOut is running");
-    $("#display").html('<div>Too slow!</div>' +
+    if (i < 9) {
+      $("#display").html('<div>Too slow!</div>' +
       '<div>Gotta think quick! Here comes the next clip...</div>');
     unanswered++;
     setTimeout(timerNextQ, 5000);
+  }else {
+    $("#display").html('<div>Too slow!</div>' +
+      '<div>Game Over!</div>' +  '<div>Here come your results...</div>');
+    unanswered++;
+    setTimeout(timerNextQ, 5000);
+  }
+    
   };
 
   function userCorrect() {
-    console.log("function userCorrect is running");
+    if (i < 9) {
     $("#display").html('<div>Correct!</div>' +
       '<div>Here comes the next clip...</div>');
     setTimeout(timerNextQ, 5000);
+    }else {
+    $("#display").html('<div>Correct!</div>' +
+      '<div>Game Over!</div>' +  '<div>Here come your results...</div>');
+    setTimeout(timerNextQ, 5000);
+  }
   };
 
   function userWrong() {
-    console.log("function userWrong is running");
+    if (i < 9) {
     $("#display").html('<div>Wrong!</div>' +
       '<div>Keep trying! Here comes the next clip...</div>');
     setTimeout(timerNextQ, 5000);
+    }else {
+    $("#display").html('<div>Wrong!</div>' +
+      '<div>Game Over!</div>' +  '<div>Here come your results...</div>');
+    setTimeout(timerNextQ, 5000);
+  }
   };
 
   function displayGameResults () {
+    $("#timer").hide();
     if (right > wrong && unanswered) {
        $("#display").html('<div>Nice work!</div>');
       $("#display").append(
