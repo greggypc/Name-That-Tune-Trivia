@@ -63,14 +63,27 @@ $(document).ready(function() {
     }
   }
 
+
+            // // Sound effect
+            // var songClip = document.createElement("audio");
+            // openingTheme.setAttribute("src", "assets/audio/kill_bill_trimmed.mp3");
+            // openingTheme.play();
+
+            // Sound effect
+            // var songClip = document.createElement("audio");
+            // songClip.setAttribute("src", triviaQs[i].song);
+            // songClip.play();
+
+            //timer runs out songclip.stop();
+
   function getQuestion() {
     console.log("getQuestion function running");
     $("#display").empty();
     $("#display").addClass("questionStyle").append('<div>' + triviaQs[i].question + '</div>');
-    $("#display").append('<div class="possibleAnswer" data="A">' + triviaQs[i].choices[0] + '</div>');
-    $("#display").append('<div class="possibleAnswer" data="B">' + triviaQs[i].choices[1] + '</div>');
-    $("#display").append('<div class="possibleAnswer" data="C">' + triviaQs[i].choices[2] + '</div>');
-    $("#display").append('<div class="possibleAnswer" data="D">' + triviaQs[i].choices[3] + '</div>');
+    $("#display").append('<div class="possibleAnswer" data-key="A">' + triviaQs[i].choices[0] + '</div>');
+    $("#display").append('<div class="possibleAnswer" data-key="B">' + triviaQs[i].choices[1] + '</div>');
+    $("#display").append('<div class="possibleAnswer" data-key="C">' + triviaQs[i].choices[2] + '</div>');
+    $("#display").append('<div class="possibleAnswer" data-key="D">' + triviaQs[i].choices[3] + '</div>');
     console.log("ran thru 1 iteration of triviaQs");
     
     
@@ -82,8 +95,10 @@ $(document).ready(function() {
        
   //   });
 
+  //var guess = $(this).attr('data-key');
+
   $(document).on("click", ".possibleAnswer", function() {
-    var userGuess = this.data;
+    var userGuess = $(this).attr('data-key');
       if (userGuess === triviaQs[i].correctAnswer) {
         console.log("u just clicked an answer");
         console.log("correct answer");
@@ -141,7 +156,10 @@ $(document).ready(function() {
     function playAgain() {
       $("#display").append('<button>Play Again!</button>');
       $("button").on("click", function() {
-        i = 0;
+      right = 0;
+      wrong = 0;
+      unanswered = 0;
+      i = 0;
       console.log("you clicked play again");
       $("button").hide();
       getQuestion();
