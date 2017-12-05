@@ -15,7 +15,7 @@ body {
 }
 
 #display {
-	margin: 0 auto;
+	margin-top: 20px;
 }
 
 h1 {
@@ -39,6 +39,7 @@ h3 {
 #timer {
 	font-size: 35px;
 	padding: 10px;
+	color: red;
 
 }
 
@@ -51,19 +52,19 @@ h3 {
 
 .possibleAnswer {
 	font-family: 'Crete Round', serif;	
-
 	font-size: 20px;
-	font-weight: bold;
 	color: white;
 	background-color: black;
 	padding: 20px;
 	margin: 5px;
-	
 	width: 300px;
+	margin: 0 auto;
+	margin-bottom: 10px;
 }
 
 .message {
 	font-size: 35px;
+	color: red;
 	padding: 20px 0 8px 0;
 }
 

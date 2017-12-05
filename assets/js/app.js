@@ -1,6 +1,6 @@
 // Trivia Game
 
-    var triviaQs = [{
+    var gameSongs = [{
 	 	song: "assets/audio/andy_griffith-t.mp3",
     choices: ["Happy Days", "I Love Lucy", "Gomer Pyle", "The Andy Griffith Show"],
 	 	correctAnswer: "D",
@@ -74,12 +74,13 @@ $(document).ready(function() {
   });
 
   function startTimer15() {
+    $("#timer").show();
         count = 11;
         counter = setInterval(timer, 1000); 
         function timer() {
             
             count--;
-            $("#timer").show();
+            
             $("#timer").html("Time Remaining: " + count); 
             if (count < 1) {
                 clearInterval(counter);
@@ -108,21 +109,21 @@ $(document).ready(function() {
     $("#display").empty();
     //Sound effect
     songClip = document.createElement("audio");
-    songClip.setAttribute("src", triviaQs[i].song);
+    songClip.setAttribute("src", gameSongs[i].song);
     songClip.play();
-    //$("#display").addClass("questionStyle").append('<div>' + triviaQs[i].question + '</div>');
-    $("#display").append('<div class="possibleAnswer" data-key="A">' + triviaQs[i].choices[0] + '</div>');
-    $("#display").append('<div class="possibleAnswer" data-key="B">' + triviaQs[i].choices[1] + '</div>');
-    $("#display").append('<div class="possibleAnswer" data-key="C">' + triviaQs[i].choices[2] + '</div>');
-    $("#display").append('<div class="possibleAnswer" data-key="D">' + triviaQs[i].choices[3] + '</div>');
-    console.log("ran thru 1 iteration of triviaQs");
+    //$("#display").addClass("questionStyle").append('<div>' + gameSongs[i].question + '</div>');
+    $("#display").append('<div class="possibleAnswer" data-key="A">' + gameSongs[i].choices[0] + '</div>');
+    $("#display").append('<div class="possibleAnswer" data-key="B">' + gameSongs[i].choices[1] + '</div>');
+    $("#display").append('<div class="possibleAnswer" data-key="C">' + gameSongs[i].choices[2] + '</div>');
+    $("#display").append('<div class="possibleAnswer" data-key="D">' + gameSongs[i].choices[3] + '</div>');
+    console.log("ran thru 1 iteration of gameSongs");
    
   };
 
    $(document).on("click", ".possibleAnswer", function() {
     songClip.setAttribute("src", "");
     var userGuess = $(this).attr('data-key');
-      if (userGuess === triviaQs[i].correctAnswer) {
+      if (userGuess === gameSongs[i].correctAnswer) {
         console.log("u just clicked an answer");
         console.log("correct answer");
         right++;
@@ -142,14 +143,14 @@ $(document).ready(function() {
     if (i < 9) {
       $("#display").html('<div class="message">Too slow!</div>');
       $("#display").append('<div class="message">Gotta think quick! Here comes the next clip...</div>');
-      $("#display").append('<img id="answerImg" src=' + triviaQs[i].image + ' />');
+      $("#display").append('<img id="answerImg" src=' + gameSongs[i].image + ' />');
      
     unanswered++;
     setTimeout(timerNextQ, 5000);
   }else {
     $("#display").html('<div>Too slow!</div>' +
       '<div class="message">Game Over!</div>' +  '<div class="message">Here come your results...</div>');
-     $("#display").append('<img id="answerImg" src=' + triviaQs[i].image + ' />');
+     $("#display").append('<img id="answerImg" src=' + gameSongs[i].image + ' />');
     unanswered++;
     setTimeout(timerNextQ, 5000);
   }
@@ -161,12 +162,12 @@ $(document).ready(function() {
     if (i < 9) {
     $("#display").html('<div class="message">Correct!</div>' +
       '<div class="message">Here comes the next clip...</div>');
-     $("#display").append('<img id="answerImg" src=' + triviaQs[i].image + ' />');
+     $("#display").append('<img id="answerImg" src=' + gameSongs[i].image + ' />');
     setTimeout(timerNextQ, 5000);
     }else {
     $("#display").html('<div class="message">Correct!</div>' +
       '<div class="message">Game Over!</div>' +  '<div class="message">Here come your results...</div>');
-     $("#display").append('<img id="answerImg" src=' + triviaQs[i].image + ' />');
+     $("#display").append('<img id="answerImg" src=' + gameSongs[i].image + ' />');
     setTimeout(timerNextQ, 5000);
   }
   };
@@ -176,12 +177,12 @@ $(document).ready(function() {
     if (i < 9) {
     $("#display").html('<div class="message">Wrong!</div>' +
       '<div class="message">Keep trying! Here comes the next clip...</div>');
-     $("#display").append('<img id="answerImg" src=' + triviaQs[i].image + ' />');
+     $("#display").append('<img id="answerImg" src=' + gameSongs[i].image + ' />');
     setTimeout(timerNextQ, 5000);
     }else {
     $("#display").html('<div class="message">Wrong!</div>' +
       '<div class="message">Game Over!</div>' +  '<div class="message">Here come your results...</div>');
-     $("#display").append('<img id="answerImg" src=' + triviaQs[i].image + ' />');
+     $("#display").append('<img id="answerImg" src=' + gameSongs[i].image + ' />');
     setTimeout(timerNextQ, 5000);
   }
   };
