@@ -1,80 +1,76 @@
 /*Trivia Game Style*/
 
-
 body {
-	font-family: 'Permanent Marker', cursive;
-	font-size: 24px;
-	text-align: center;
-	background-color: gray;
-	padding: 10px;
-	margin: 0 auto;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 24px;
+    text-align: center;
+    background-color: gray;
+    padding: 10px;
+    margin: 0 auto;
 }
 
 .container {
-	background-color: white;
+    background-color: white;
 }
 
 #display {
-	margin-top: 20px;
+    margin-top: 10px;
 }
 
 h1 {
-	font-weight: bold;
-	font-size: 50px;
-	padding: 20px 0 8px 0;
-
+    font-weight: bold;
+    font-size: 50px;
+    padding: 20px 0 8px 0;
 }
 
 h3 {
-	font-weight: bold;
-	font-size: 35px;
+    font-weight: bold;
+    font-size: 35px;
 }
 
 #buttonStart {
-	padding: 5px;
-	margin: 30px 0 30px 0;
+    padding: 5px;
+    margin: 30px 0 30px 0;
 }
 
 
 #timer {
-	font-size: 35px;
-	padding: 10px;
-	color: red;
-
+    font-size: 35px;
+    padding: 10px;
+    color: red;
 }
 
 .questionStyle {
-	font-size: 28px;
-	font-weight: bold;
-	color: red;
-	padding: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: red;
+    padding: 20px;
 }
 
 .possibleAnswer {
-	font-family: 'Crete Round', serif;	
-	font-size: 20px;
-	color: white;
-	background-color: black;
-	padding: 20px;
-	margin: 5px;
-	width: 300px;
-	margin: 0 auto;
-	margin-bottom: 10px;
+    font-family: 'Crete Round', serif;
+    font-size: 20px;
+    color: white;
+    background-color: black;
+    padding: 20px;
+    margin: 5px;
+    width: 300px;
+    margin: 0 auto;
+    margin-bottom: 10px;
 }
 
 .message {
-	font-size: 35px;
-	color: red;
-	padding: 20px 0 8px 0;
+    font-size: 35px;
+    color: red;
+    padding: 20px 0 8px 0;
 }
 
 #answerImg {
-	width: 500px;
-	padding: 20px;
+    width: 500px;
+    padding: 20px;
 }
 
 #playAgain {
-	padding: 5px;
-	margin: 30px 0 30px 0;
+    padding: 5px;
+    margin: 30px 0 30px 0;
 }
-
