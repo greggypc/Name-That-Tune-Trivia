@@ -198,7 +198,7 @@ $(document).ready(function() {
                 '<div class="message">Unanswered Questions: ' + unanswered + '</div>');
             playAgain();
         } else if (right <= wrong) {
-            $("#display").html('<div class="message">No so great...</div>');
+            $("#display").html('<div class="message">Not so great...</div>');
             $("#display").append(
                 '<div class="message">Correct Answers: ' + right + '</div>' +
                 '<div class="message">Incorrect Answers: ' + wrong + '</div>' +
